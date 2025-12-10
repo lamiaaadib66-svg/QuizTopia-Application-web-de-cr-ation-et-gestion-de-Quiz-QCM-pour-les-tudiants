@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resultat', function (Blueprint $table) {
-            $table->id('id_resultat');        // Primary key
-            $table->integer('score');         // Score obtained
-            $table->dateTime('date_passage'); // Date/time of quiz attempt
+        Schema::create('groupes', function (Blueprint $table) {
+            $table->id('ID_Groupe'); // Primary key
+            $table->string('Nom_Groupe');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('resultat');
+        Schema::dropIfExists('groupes');
     }
 };
