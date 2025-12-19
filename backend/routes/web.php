@@ -9,20 +9,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/choix', [ChoixController::class, 'index']);
-Route::get('/choix/{id}', [ChoixController::class, 'show']);    
-Route::post('/choix', [ChoixController::class, 'store']);       
-Route::put('/choix/{id}', [ChoixController::class, 'update']);  
-Route::delete('/choix/{id}', [ChoixController::class, 'destroy']); 
+Route::get('/api/choix', [ChoixController::class, 'index']);
+Route::get('/api/choix/{id}', [ChoixController::class, 'show']);    
+Route::post('/api/choix', [ChoixController::class, 'store']);       
+Route::put('/api/choix/{id}', [ChoixController::class, 'update']);  
+Route::delete('/api/choix/{id}', [ChoixController::class, 'destroy']); 
 
-Route::get('/resultat', [ResultatController::class, 'index']);        
-Route::get('/resultat/{id}', [ResultatController::class, 'show']);    
-Route::post('/resultat', [ResultatController::class, 'store']);       
-Route::put('/resultat/{id}', [ResultatController::class, 'update']);  
-Route::delete('/resultat/{id}', [ResultatController::class, 'destroy']); 
+Route::get('/api/resultat', [ResultatController::class, 'index']);        
+Route::get('/api/resultat/{id}', [ResultatController::class, 'show']);    
+Route::post('/api/resultat', [ResultatController::class, 'store']);       
+Route::put('/api/resultat/{id}', [ResultatController::class, 'update']);  
+Route::delete('/api/resultat/{id}', [ResultatController::class, 'destroy']); 
 
-Route::get('/questions', [QuestionController::class, 'index']);
-Route::get('/questions/{id}', [QuestionController::class, 'show']);
-Route::post('/questions', [QuestionController::class, 'create']);
-Route::put('/questions/{id}', [QuestionController::class, 'update']);
-Route::delete('/questions/{id}', [QuestionController::class, 'delete']);
+Route::get('/api/questions', [QuestionController::class, 'index']);
+Route::get('/api/questions/{id}', [QuestionController::class, 'show']);
+Route::post('/api/questions', [QuestionController::class, 'create']);
+Route::put('/api/questions/{id}', [QuestionController::class, 'update']);
+Route::delete('/api/questions/{id}', [QuestionController::class, 'delete']);

@@ -11,7 +11,7 @@ class Choix extends Model
     public $timestamps = true;
 
     // CREATE
-    public static function createChoix(string $texteChoix, bool $estCorrect, int $idResultat, int $idQuestion): Choix
+    public static function createChoix($texteChoix, $estCorrect, $idResultat, $idQuestion)
     {
         $choix = new self();
         $choix->Texte_Choix = $texteChoix;
@@ -30,13 +30,13 @@ class Choix extends Model
     }
 
     // READ ONE
-    public static function getChoixById(int $id): ?Choix
+    public static function getChoixById($id)
     {
         return self::find($id);
     }
 
     // UPDATE
-    public static function updateChoix(int $id, ?string $texteChoix = null, ?bool $estCorrect = null, ?int $idResultat = null, ?int $idQuestion = null): ?Choix
+    public static function updateChoix($id, $texteChoix = null, $estCorrect = null, $idResultat = null, $idQuestion = null)
     {
         $choix = self::find($id);
         if (!$choix) {
@@ -53,7 +53,7 @@ class Choix extends Model
     }
 
     // DELETE
-    public static function deleteChoix(int $id): bool
+    public static function deleteChoix($id)
     {
         $choix = self::find($id);
         if (!$choix) {

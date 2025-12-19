@@ -11,7 +11,7 @@ class Resultat extends Model
     public $timestamps = true;
 
     // CREATE
-    public static function createResultat(int $pointsObtenus, int $idQuestion, int $idSession): Resultat
+    public static function createResultat($pointsObtenus, $idQuestion, $idSession)
     {
         $resultat = new self();
         $resultat->Points_Obtenus = $pointsObtenus;
@@ -29,13 +29,13 @@ class Resultat extends Model
     }
 
     // READ ONE
-    public static function getResultatById(int $id): ?Resultat
+    public static function getResultatById($id)
     {
         return self::find($id);
     }
 
     // UPDATE
-    public static function updateResultat(int $id, ?int $pointsObtenus = null, ?int $idQuestion = null, ?int $idSession = null): ?Resultat
+    public static function updateResultat($id, $pointsObtenus = null, $idQuestion = null, $idSession = null)
     {
         $resultat = self::find($id);
         if (!$resultat) {
@@ -51,7 +51,7 @@ class Resultat extends Model
     }
 
     // DELETE
-    public static function deleteResultat(int $id): bool
+    public static function deleteResultat($id)
     {
         $resultat = self::find($id);
         if (!$resultat) {
