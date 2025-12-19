@@ -9,18 +9,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// choixes routes
 Route::get('/api/choix', [ChoixController::class, 'index']);
 Route::get('/api/choix/{id}', [ChoixController::class, 'show']);    
 Route::post('/api/choix', [ChoixController::class, 'store']);       
 Route::put('/api/choix/{id}', [ChoixController::class, 'update']);  
 Route::delete('/api/choix/{id}', [ChoixController::class, 'destroy']); 
 
+// Resultats routes
 Route::get('/api/resultat', [ResultatController::class, 'index']);        
 Route::get('/api/resultat/{id}', [ResultatController::class, 'show']);    
 Route::post('/api/resultat', [ResultatController::class, 'store']);       
 Route::put('/api/resultat/{id}', [ResultatController::class, 'update']);  
 Route::delete('/api/resultat/{id}', [ResultatController::class, 'destroy']); 
 
+// Questions routes
 Route::get('/api/questions', [QuestionController::class, 'index']);
 Route::get('/api/questions/{id}', [QuestionController::class, 'show']);
 Route::post('/api/questions', [QuestionController::class, 'create']);
