@@ -7,59 +7,60 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // CREATE
+    public function create(Request $request)
+    {
+        Question::createQuestion(
+            $request->Num_Ordre,
+            $request->Point_Question,
+            $request->Enonce_Question,
+            $request->ID_Quiz
+        );
+
+        return response()->json(['message' => 'Question created']);
+    }
+
+    // READ ALL
     public function index()
     {
-        //
+        $questions = Question::getAll();
+        return response()->json($questions);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // READ ONE 
+    public function show($id)
     {
-        //
+        $question = Question::getById($id);
+        if (!$question) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+        return response()->json($question);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // UPDATE
+    public function update(Request $request, $id)
     {
-        //
+        $question = Question::updateQuestion(
+            $id,
+            $request->Num_Ordre,
+            $request->Point_Question,
+            $request->Enonce_Question
+        );
+
+        if (!$question) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+
+        return response()->json(['message' => 'Question updated']);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Question $question)
+    // DELETE
+    public function delete($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Question $question)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Question $question)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Question $question)
-    {
-        //
+        $deleted = Question::deleteQuestion($id);
+        if (!$deleted) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+        return response()->json(['message' => 'Question deleted']);
     }
 }
