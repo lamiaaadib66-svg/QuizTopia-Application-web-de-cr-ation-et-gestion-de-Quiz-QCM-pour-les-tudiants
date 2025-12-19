@@ -7,59 +7,64 @@ use Illuminate\Http\Request;
 
 class ResultatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // GET all resultats
     public function index()
     {
-        //
+        return response()->json(Resultat::getAllResultats());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // GET single resultat
+    public function show($id)
     {
-        //
+        $resultat = Resultat::getResultatById($id);
+        if (!$resultat) {
+            return response()->json(['message' => 'Resultat not found'], 404);
+        }
+        return response()->json($resultat);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // CREATE a resultat
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'Points_Obtenus' => 'required|integer',
+            'ID_Question' => 'required|integer',
+            'ID_Session' => 'required|integer',
+        ]);
+
+        $resultat = Resultat::createResultat(
+            $request->Points_Obtenus,
+            $request->ID_Question,
+            $request->ID_Session
+        );
+
+        return response()->json($resultat, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Resultat $resultat)
+    // UPDATE a resultat
+    public function update(Request $request, $id)
     {
-        //
+        $resultat = Resultat::updateResultat(
+            $id,
+            $request->Points_Obtenus ?? null,
+            $request->ID_Question ?? null,
+            $request->ID_Session ?? null
+        );
+
+        if (!$resultat) {
+            return response()->json(['message' => 'Resultat not found'], 404);
+        }
+
+        return response()->json($resultat);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Resultat $resultat)
+    // DELETE a resultat
+    public function destroy($id)
     {
-        //
-    }
+        if (!Resultat::deleteResultat($id)) {
+            return response()->json(['message' => 'Resultat not found'], 404);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Resultat $resultat)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Resultat $resultat)
-    {
-        //
+        return response()->json(['message' => 'Resultat deleted successfully']);
     }
 }
